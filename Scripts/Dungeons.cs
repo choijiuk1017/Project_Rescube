@@ -7,8 +7,6 @@ public class Dungeons : MonoBehaviour
 
     public Vector3 TargetPosition;
     Vector3 CorrectPosition;
-    SpriteRenderer sprite;
-
     public int number;
 
 
@@ -23,12 +21,32 @@ public class Dungeons : MonoBehaviour
         CorrectPosition = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // 퍼즐이 부드럽게 이동하도록 설정
-        transform.position = Vector3.Lerp(transform.position, TargetPosition, 0.05f);
+        
 
         
+    }
+    public void OnMoveTo(Vector3 end)
+    {
+        StartCoroutine("MoveTo", end);
+    }
+
+    private IEnumerator MoveTo(Vector3 end)
+    {
+        float current = 0;
+        float percent = 0;
+        float moveTime = 0.1f;
+        Vector3 start = GetComponent<Transform>().localPosition;
+
+        while (percent < 1)
+        {
+            current += Time.deltaTime;
+            percent = current / moveTime;
+
+            GetComponent<Transform>().localPosition = Vector3.Lerp(start, end, percent);
+
+            yield return null;
+        }
     }
 }

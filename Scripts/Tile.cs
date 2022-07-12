@@ -12,6 +12,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
 	public int number;
 
+	public bool isMove = true;
 	public	bool IsCorrected { private set; get; } = false;
 
 	private	int	numeric;
@@ -25,6 +26,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 		get => numeric;
 	}
 
+	
 	public void Setup(Board board, int hideNumeric, int numeric)
 	{
 		this.board	= board;
@@ -37,6 +39,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 			textNumeric.enabled = false;
 		}
 	}
+	
 
 	public void SetCorrectPosition()
 	{
@@ -47,6 +50,8 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 	{
 		// 클릭했을 때 행동
 		board.IsMoveTile(this);
+		linkDungeon(this);
+		
 	}
 
 	public void OnMoveTo(Vector3 end)
@@ -69,9 +74,18 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 			GetComponent<RectTransform>().localPosition = Vector3.Lerp(start, end, percent);
 
 			yield return null;
-		}
-
-		IsCorrected = correctPosition == GetComponent<RectTransform>().localPosition ? true : false;
+		}		
 	}
+	
+	public void linkDungeon(Tile tile)
+    {
+		for(int i = 0; i < 9; i++)
+        {
+			if (tile.Numeric == board.dungeons[i].number)
+            {
+				board.moveDungeon(this);
+            }
+		}	
+    }
 }
 

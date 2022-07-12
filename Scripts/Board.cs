@@ -5,25 +5,25 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject tilePrefab;                              // 숫자 타일 프리팹
+	private GameObject tilePrefab; // 숫자 타일 프리팹
 	[SerializeField]
-	private Transform tilesParent;                          // 타일이 배치되는 "Board" 오브젝트의 Transform
+	private Transform tilesParent; // 타일이 배치되는 "Board" 오브젝트의 Transform
 
-	
 	[SerializeField]
-	public DungeonChange dungeonChange;
-
-	Dungeons dungeons;
+	public Dungeons[] dungeons; // 던전
 
 
-	public List<Tile> tileList;                                // 생성한 타일 정보 저장
+	public List<Tile> tileList; // 생성한 타일 정보 저장
 
-	private Vector2Int puzzleSize = new Vector2Int(3, 3);       // 4x4 퍼즐
-	private float neighborTileDistance = 102;               // 인접한 타일 사이의 거리. 별도로 계산할 수도 있다.
+	private Vector2Int puzzleSize = new Vector2Int(3, 3);  // 3x3 퍼즐
+	private float neighborTileDistance = 102; // 인접한 타일 사이의 거리. 별도로 계산할 수도 있다.
 
-	public Vector3 EmptyTilePosition { set; get; }          // 빈 타일의 위치
-	public int Playtime { private set; get; } = 0;      // 게임 플레이 시간
-	public int MoveCount { private set; get; } = 0; // 이동 횟수
+	public Vector3 EmptyTilePosition { set; get; } // 빈 타일의 위치
+
+
+	public GameObject emptyDungeon; // 빈 던전
+	public GameObject emptyTile;// 빈 타일
+	public GameObject player;
 
 	private IEnumerator Start()
 	{
@@ -35,8 +35,10 @@ public class Board : MonoBehaviour
 
 		// 현재 프레임이 종료될 때까지 대기
 		yield return new WaitForEndOfFrame();
-		EmptyTilePosition = tileList[tileList.Count - 1].GetComponent<RectTransform>().localPosition;
-		// tileList에 있는 모든 요소의 SetCorrectPosition() 메소드 호출
+
+		EmptyTilePosition = tileList[puzzleSize.x*puzzleSize.y -1].GetComponent<RectTransform>().localPosition;
+
+		//tileList에 있는 모든 요소의 SetCorrectPosition() 메소드 호출
 		tileList.ForEach(x => x.SetCorrectPosition());
 
 		//StartCoroutine("OnSuffle");
@@ -46,9 +48,10 @@ public class Board : MonoBehaviour
 
     private void Update()
     {
-		linkDungeon(dungeonChange);
-    }
-
+		
+	}
+	
+	// 타일 스폰 함수
     private void SpawnTiles()
 	{
 		for (int y = 0; y < puzzleSize.y; ++y)
@@ -64,7 +67,9 @@ public class Board : MonoBehaviour
 			}
 		}
 	}
+	
 
+	/*
 	private IEnumerator OnSuffle()
 	{
 		float current = 0;
@@ -86,37 +91,42 @@ public class Board : MonoBehaviour
 		// 그래서 현재 타일리스트의 마지막에 있는 요소가 무조건 빈 타일
 		EmptyTilePosition = tileList[tileList.Count - 1].GetComponent<RectTransform>().localPosition;
 	}
+	*/
 
+	// 타일 이동 함수
 	public void IsMoveTile(Tile tile)
 	{
 		if (Vector3.Distance(EmptyTilePosition, tile.GetComponent<RectTransform>().localPosition) == neighborTileDistance)
 		{
 			Vector3 goalPosition = EmptyTilePosition;
 
+			if (Vector3.Distance(player.transform.position, dungeons[tile.Numeric - 1].transform.position) < 10)
+			{
+				return;
+			}
+
 			EmptyTilePosition = tile.GetComponent<RectTransform>().localPosition;
 
 			tile.OnMoveTo(goalPosition);
-
-			// 타일을 이동할 때마다 이동 횟수 증가
-			MoveCount++;
 		}
 	}
 
-	public void linkDungeon(DungeonChange dungeonChange)
+
+	// 던전 이동 함수
+	public void moveDungeon(Tile tile)
     {
-		for(int i = 0; i < 9; i++)
+		Vector3 goalPosition = emptyDungeon.transform.position;
+		if(Vector3.Distance(dungeons[tile.Numeric-1].transform.position, goalPosition) <= 24)
         {
-			dungeonChange.dungeons[i].transform.position = tileList[i].transform.position;
-        }
-    }
-
-	private IEnumerator CalculatePlaytime()
-	{
-		while (true)
-		{
-			Playtime++;
-
-			yield return new WaitForSeconds(1);
+			if (Vector3.Distance(player.transform.position, dungeons[tile.Numeric - 1].transform.position) < 10)
+			{
+				return;
+			}
+			emptyDungeon.transform.position = Vector3.Lerp(emptyDungeon.transform.position, dungeons[tile.Numeric - 1].transform.position, 1);
+			dungeons[tile.Numeric - 1].OnMoveTo(goalPosition);
 		}
+		
 	}
+
+
 }
