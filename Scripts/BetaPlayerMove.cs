@@ -9,6 +9,8 @@ public class BetaPlayerMove : MonoBehaviour
     private float speed;
     private Vector2 direction;
 
+    public int Hp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +37,10 @@ public class BetaPlayerMove : MonoBehaviour
         moveVector.y = Input.GetAxisRaw("Vertical");
 
         direction = moveVector;
+    }
+
+    public void TakeDamge(int damage)
+    {
+        Hp = Hp - damage;
     }
 }

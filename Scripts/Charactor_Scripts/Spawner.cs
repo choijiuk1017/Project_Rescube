@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
     {
         while(true)
         {
-            for(int i = 0; i < 1; i++)
+            for(int i = 0; i < 3; i++)
             {
                 Instantiate(enemyPrefabs[i], spawnPoint.position, Quaternion.identity);
             }
