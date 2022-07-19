@@ -15,6 +15,7 @@ public class BetaPlayerMove : MonoBehaviour
     void Start()
     {
         direction = Vector2.zero;
+        Hp = 10;
     }
 
     // Update is called once per frame
@@ -43,4 +44,14 @@ public class BetaPlayerMove : MonoBehaviour
     {
         Hp = Hp - damage;
     }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Spider")
+        {
+            TakeDamge(1);
+        }
+    }
+
+
 }
