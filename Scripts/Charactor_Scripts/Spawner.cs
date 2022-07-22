@@ -8,7 +8,6 @@ public class Spawner : MonoBehaviour
     public Transform spawnPoint;
 
     public BetaPlayerMove player;
-    public Monster monster;
 
     public void OnTriggerEnter2D(Collider2D col)
     {
@@ -24,9 +23,9 @@ public class Spawner : MonoBehaviour
     //코루틴을 이용해 지속적인 스폰이 가능하도록 설정
     IEnumerator Spawn()
     {
-        while(true)
+        while (true)
         {
-            for(int i = 0; i < 1; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Instantiate(enemyPrefabs[i], spawnPoint.position, Quaternion.identity);
             }

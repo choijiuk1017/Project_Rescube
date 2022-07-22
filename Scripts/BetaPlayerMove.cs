@@ -9,10 +9,13 @@ public class BetaPlayerMove : MonoBehaviour
     private float speed;
     private Vector2 direction;
 
+    public int Hp;
+
     // Start is called before the first frame update
     void Start()
     {
         direction = Vector2.zero;
+        Hp = 10;
     }
 
     // Update is called once per frame
@@ -36,4 +39,19 @@ public class BetaPlayerMove : MonoBehaviour
 
         direction = moveVector;
     }
+
+    public void TakeDamge(int damage)
+    {
+        Hp = Hp - damage;
+    }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Spider")
+        {
+            TakeDamge(1);
+        }
+    }
+
+
 }
