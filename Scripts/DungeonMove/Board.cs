@@ -26,9 +26,6 @@ public class Board : MonoBehaviour
 	public GameObject player;
 	public GameObject itemBox;
 
-	private int itemDungeon = Random.Range(0, 2);
-	private int itemDungeonNum = Random.Range(1, 3);
-	private int selectItemDungeon = Random.Range(0, 9);
 
 	private IEnumerator Start()
 	{
@@ -53,26 +50,9 @@ public class Board : MonoBehaviour
 	}
     private void Update()
     {
-		Debug.Log(itemDungeonNum);
-		Debug.Log(itemDungeon);
-		Debug.Log(selectItemDungeon);
-		RandomItemDungeon();
+
 	}
 
-	void RandomItemDungeon()
-    {
-		if (itemDungeon == 0)
-        {
-			if(itemDungeonNum == 1)
-            {
-				GameObject instantSpawn = Instantiate(itemBox, dungeons[selectItemDungeon].transform.position, Quaternion.identity);
-			}
-        }
-        else
-        {
-			return;
-        }
-    }
 	
 	// 타일 스폰 함수
     private void SpawnTiles()
