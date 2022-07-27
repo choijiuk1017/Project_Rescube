@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6932226176488223222}
   - component: {fileID: 6932226176488223216}
   - component: {fileID: 6932226176488223219}
+  - component: {fileID: 6222933241580508566}
   m_Layer: 0
   m_Name: SpiderMonster
   m_TagString: Spider
@@ -135,7 +136,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &6932226176488223222
 Animator:
   serializedVersion: 4
@@ -182,7 +183,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curState: 0
-  target: {fileID: 0}
+  target: {fileID: 7610496126120094715, guid: 07592fa8a5d5fbd4397f617cba528921, type: 3}
   direction: {x: 0, y: 0, z: 0}
   velocity: 0
   accelaration: 0
+  player: {fileID: 5183350177745257347, guid: 07592fa8a5d5fbd4397f617cba528921, type: 3}
+--- !u!114 &6222933241580508566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6932226176488223225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b5f5f55f1a0db4bac742b2ec19b540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  dmg: 1
