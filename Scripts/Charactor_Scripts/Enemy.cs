@@ -8,6 +8,15 @@ public class Enemy : MonoBehaviour
     public int dmg;
 
     SpriteRenderer spriteRenderer;
+    void Start()
+    {
+        
+    }
+
+    void Awake()
+    {
+        
+    }
     void OnHit(int dmg)
     {
         health -= dmg;
