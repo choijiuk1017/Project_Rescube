@@ -26,7 +26,8 @@ public class RandomItemBox : MonoBehaviour
         for(int i = 0; i < random; i++)
         {
             int randomNum = Random.Range(0, 8);
-            Instantiate(itemBox, dungeons[randomNum].transform.position, Quaternion.identity);
+            GameObject item = Instantiate(itemBox, new Vector2(0,0), Quaternion.identity);
+            item.transform.SetParent(dungeons[randomNum].transform, false);
         }
        
     }
