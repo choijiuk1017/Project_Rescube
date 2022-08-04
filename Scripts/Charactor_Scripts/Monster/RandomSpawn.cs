@@ -5,12 +5,12 @@ using UnityEngine;
 public class RandomSpawn : MonoBehaviour
 {
     public GameObject rangeObject;
-    BoxCollider rangeCollider;
+    BoxCollider2D rangeCollider;
 
     public GameObject Spawner;
     private void Awake()
     {
-        rangeCollider = rangeObject.GetComponent<BoxCollider>();
+        rangeCollider = rangeObject.GetComponent<BoxCollider2D>();
     }
     // Start is called before the first frame update
     private void Start()
