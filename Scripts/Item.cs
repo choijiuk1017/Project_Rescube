@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public string type;
-    Rigidbody2D rigid;
-    void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-    }
-
-    void Update()
-    {
-        
-    }
+    public enum Type { Ammo, coin, Grenade, Heart, Weapon };
+    public Type type;
+    public int value;
+    
 }
