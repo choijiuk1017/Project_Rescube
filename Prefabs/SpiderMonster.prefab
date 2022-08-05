@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6932226176488223216}
   - component: {fileID: 6932226176488223219}
   - component: {fileID: 6222933241580508566}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpiderMonster
   m_TagString: Spider
   m_Icon: {fileID: 0}
@@ -200,5 +200,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b5f5f55f1a0db4bac742b2ec19b540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 2
   dmg: 1
