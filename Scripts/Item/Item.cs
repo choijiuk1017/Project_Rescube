@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+[CreateAssetMenu(fileName = "New Item", menuName = "New Item/item")]
+public class Item : ScriptableObject
 {
-    public string type;
-    Rigidbody2D rigid;
-    void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
+    public enum ItemType
+    {   
+        Weapon,
+        Used,
+        Food,
     }
+    public string itemName;
+    public ItemType itemtype;
+    public Sprite itemImage;
+    public GameObject itemPrefab;
 
-    void Update()
-    {
-        
-    }
+    public string weaponType;
+
 }

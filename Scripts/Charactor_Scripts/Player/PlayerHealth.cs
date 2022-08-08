@@ -24,15 +24,7 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.tag == "Item")
         {
             Item item = collision.GetComponent<Item>();
-            switch (item.type)
-            {
-                case "HpPotionSmall":
-                    health += 2;
-                    break;
-                case "HpPotionBig":
-                    health += 6;
-                    break;
-            }
+            
             Destroy(collision.gameObject);
         }
     }
