@@ -5,12 +5,12 @@ using UnityEngine;
 public class BushMonsterAttack : MonoBehaviour
 {
     public BushMonsterMove monster;
-    Animator anim;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -21,9 +21,23 @@ public class BushMonsterAttack : MonoBehaviour
 
     public void Attack()
     {
-        if(monster.curState == BushMonsterMove.CurrentState.attack)
+        anim.SetTrigger("isAttack");
+    }
+
+    public void StopAttack()
+    {
+        anim.ResetTrigger("isAttack");
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
         {
-            anim.SetTrigger("isAttack");
-        }    
+            Attack();
+        }
+        else if(col == null)
+        {
+            StopAttack();
+        }
     }
 }

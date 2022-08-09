@@ -64,5 +64,9 @@ public class BushMonsterMove : MonoBehaviour
 
             curState = CurrentState.attack;
         }
+        if (distance <= 2f)
+        {
+            velocity = 0f;
+        }
     }
 }
