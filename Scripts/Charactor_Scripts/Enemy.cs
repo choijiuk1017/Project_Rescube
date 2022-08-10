@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     {
         health -= dmg;
         if (health <= 0)
-            Destroy(gameObject);
+            Invoke("Dead", 0.5f);
         //spriteRenderer.sprite = sprites[1];
         //ReturnSprite();
     }
@@ -40,5 +40,10 @@ public class Enemy : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamaged(dmg);
         }
+    }
+
+    void Dead()
+    {
+        Destroy(gameObject);
     }
 }

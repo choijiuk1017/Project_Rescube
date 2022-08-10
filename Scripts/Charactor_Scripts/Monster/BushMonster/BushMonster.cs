@@ -5,7 +5,7 @@ using UnityEngine;
 public class BushMonster : MonoBehaviour
 {
     public Animator anim;
-    public int Hp;
+    public Enemy monster;
 
     // Start is called before the first frame update
     void Start()
@@ -16,10 +16,9 @@ public class BushMonster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Hp == 0)
+        if (monster.health == 0)
         {
             anim.SetTrigger("isDead");
-            Destroy(gameObject);
         }
 
     }

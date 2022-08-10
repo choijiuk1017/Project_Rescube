@@ -7,6 +7,8 @@ public class BushMonsterAttack : MonoBehaviour
     public BushMonsterMove monster;
     public Animator anim;
 
+    public PlayerHealth health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,7 @@ public class BushMonsterAttack : MonoBehaviour
     public void Attack()
     {
         anim.SetTrigger("isAttack");
+        health.TakeDamaged(2f);
     }
 
     public void StopAttack()

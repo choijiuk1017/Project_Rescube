@@ -33,4 +33,9 @@ public class PlayerHealth : MonoBehaviour
         if (health >= maxHealth)
             health = maxHealth;
     }
+
+    void TakeDamage(float damage)
+    {
+        health = health - damage;
+    }
 }
