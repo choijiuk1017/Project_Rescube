@@ -26,14 +26,11 @@ public class Board : MonoBehaviour
 	public GameObject player;
 	public GameObject itemBox;
 
-	private int itemDungeon = Random.Range(0, 2);
-	private int itemDungeonNum = Random.Range(1, 3);
-	private int selectItemDungeon = Random.Range(0, 9);
 
 	private IEnumerator Start()
 	{
 		tileList = new List<Tile>();
-		
+
 		SpawnTiles();
 
 		UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(tilesParent.GetComponent<RectTransform>());
@@ -41,7 +38,7 @@ public class Board : MonoBehaviour
 		// 현재 프레임이 종료될 때까지 대기
 		yield return new WaitForEndOfFrame();
 
-		EmptyTilePosition = tileList[puzzleSize.x*puzzleSize.y -1].GetComponent<RectTransform>().localPosition;
+		EmptyTilePosition = tileList[puzzleSize.x * puzzleSize.y - 1].GetComponent<RectTransform>().localPosition;
 
 		//tileList에 있는 모든 요소의 SetCorrectPosition() 메소드 호출
 		tileList.ForEach(x => x.SetCorrectPosition());
@@ -51,31 +48,14 @@ public class Board : MonoBehaviour
 		//StartCoroutine("CalculatePlaytime");
 
 	}
-    private void Update()
-    {
-		Debug.Log(itemDungeonNum);
-		Debug.Log(itemDungeon);
-		Debug.Log(selectItemDungeon);
-		RandomItemDungeon();
+	private void Update()
+	{
+
 	}
 
-	void RandomItemDungeon()
-    {
-		if (itemDungeon == 0)
-        {
-			if(itemDungeonNum == 1)
-            {
-				GameObject instantSpawn = Instantiate(itemBox, dungeons[selectItemDungeon].transform.position, Quaternion.identity);
-			}
-        }
-        else
-        {
-			return;
-        }
-    }
-	
+
 	// 타일 스폰 함수
-    private void SpawnTiles()
+	private void SpawnTiles()
 	{
 		for (int y = 0; y < puzzleSize.y; ++y)
 		{
@@ -90,7 +70,7 @@ public class Board : MonoBehaviour
 			}
 		}
 	}
-	
+
 
 	/*
 	private IEnumerator OnSuffle()
@@ -137,10 +117,10 @@ public class Board : MonoBehaviour
 
 	// 던전 이동 함수
 	public void moveDungeon(Tile tile)
-    {
+	{
 		Vector3 goalPosition = emptyDungeon.transform.position;
-		if(Vector3.Distance(dungeons[tile.Numeric-1].transform.position, goalPosition) <= 24)
-        {
+		if (Vector3.Distance(dungeons[tile.Numeric - 1].transform.position, goalPosition) <= 24)
+		{
 			if (Vector3.Distance(player.transform.position, dungeons[tile.Numeric - 1].transform.position) < 15.5f)
 			{
 				return;
@@ -148,8 +128,6 @@ public class Board : MonoBehaviour
 			emptyDungeon.transform.position = Vector3.Lerp(emptyDungeon.transform.position, dungeons[tile.Numeric - 1].transform.position, 1);
 			dungeons[tile.Numeric - 1].OnMoveTo(goalPosition);
 		}
-		
+
 	}
-
-
 }
